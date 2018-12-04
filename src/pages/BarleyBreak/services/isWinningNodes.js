@@ -1,9 +1,10 @@
 const isWinningnodes = (nodes) => {
-  return nodes.filter((node => node)).every((node, index) => {
-    if (index === 0) return true;
-    const prevNode = nodes[index - 1];
-    return prevNode.value < node.value;
-  });
+  const numberNodes = nodes.filter((node => node.value !== null));
+  return numberNodes.every((node, index) => {
+      if (index === 0) return true;
+      const prevNode = numberNodes[index - 1];
+      return prevNode.value < node.value;
+    });
 };
 
 export default isWinningnodes;

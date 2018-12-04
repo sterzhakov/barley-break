@@ -17,7 +17,7 @@ describe('services/isWinningNodes', () => {
     ).toBeTruthy();
   });
 
-  it('loosing combination', () => {
+  it('loosing combination 1', () => {
     expect(
       isWinningNodes([
         { top: 0, left: 0, value: 1, },
@@ -33,7 +33,7 @@ describe('services/isWinningNodes', () => {
     ).toBeFalsy();
   });
 
-  fit('loosing combination', () => {
+  it('loosing combination 2', () => {
     expect(
       isWinningNodes([
         { top: 0, left: 0, value: 1, },
