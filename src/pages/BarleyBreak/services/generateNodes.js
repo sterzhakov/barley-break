@@ -8,7 +8,7 @@ const generatenodes = (width, startFrom = 0) => {
   return randomizedNumbers.map((number, index) => {
     const top = Math.floor(index / width || 0);
     const left = index - top * width;
-    const value = number === null ? null : startFrom + number;
+    const value = number === null ? null : startFrom + number + 1;
     return { value, top, left };
   });
 };
