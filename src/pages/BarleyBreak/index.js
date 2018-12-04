@@ -5,11 +5,11 @@ import rootReducer from './reducers';
 import App from './components/App';
 import generateNodes from './services/generateNodes';
 
-const store = createStore(rootReducer, {
-  nodes: generateNodes(3),
-});
-
 const BarleyBreak = (props = {}) => {
+  const store = createStore(rootReducer, {
+    nodes: generateNodes(props.width),
+  });
+
   return (
     <Provider store={store}>
       <App {...props}/>

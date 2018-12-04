@@ -8,27 +8,15 @@ import switchNodes from '../services/switchNodes';
 
 const handlers = [
   withHandlers({
-    onBreakElementClick: (props) => (event, nextNode) => {
-      const selectedNode = props.nodes.find(node => node.selected);
-      if (!selectedNode) return null;
-      const positionsStepsCount = countPositionSteps(selectedNode, nextNode);
+    onElementClick: (props) => (event, numberNode) => {
+      if (numberNode.value === null) return null;
+      const breakedNode = props.nodes.find(node => node.value === null);
+      if (!breakedNode) return null;
+      const positionsStepsCount = countPositionSteps(numberNode, breakedNode);
       if (positionsStepsCount > 1) return null;
-      const nodes = switchNodes(props.nodes, selectedNode, nextNode);
+      const nodes = switchNodes(props.nodes, numberNode, breakedNode);
       props.replaceNodes(nodes);
-      props.toggleNode(nextNode);
       props.increaseStepCount();
-    },
-    onNumberElementClick: (props) => (event, node) => {
-      props.toggleNode({ top: node.top, left: node.left });
-    },
-  }),
-  withHandlers({
-    onElementClick: (props) => (event, node) => {
-      if (node.value === null) {
-        props.onBreakElementClick(event, node);
-      } else {
-        props.onNumberElementClick(event, node);
-      }
     },
   }),
 ];
