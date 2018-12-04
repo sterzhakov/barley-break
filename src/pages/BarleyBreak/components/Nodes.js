@@ -1,6 +1,7 @@
 import React from 'react';
 import withStyles from 'react-jss';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 const Nodes = (props = {}) => {
   const {
@@ -30,13 +31,18 @@ const Nodes = (props = {}) => {
 };
 
 const styles = {
-  nodes: {
-    width: '200px',
-    height: '200px',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr',
-    backgroundColor: '#ebebeb',
+  nodes: (props = {}) => {
+    const { nodes } = props;
+    const nodesWidthCount = nodes.length / Math.sqrt(nodes.length);
+    const gridTemplateFr = _.fill(Array(nodesWidthCount), '1fr').join(' ');
+    return {
+      width: '200px',
+      height: '200px',
+      display: 'grid',
+      gridTemplateColumns: gridTemplateFr,
+      gridTemplateRows: gridTemplateFr,
+      backgroundColor: '#ebebeb',
+    };
   },
   node: {
     fontSize: '30px',
