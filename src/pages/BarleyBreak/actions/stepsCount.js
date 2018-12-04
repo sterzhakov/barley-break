@@ -1,6 +1,7 @@
-import keyMirror from 'keymirror';
+export const increaseStepCount = () => ({
+  type: 'INCREASE_STEP_COUNT',
+});
 
-export default keyMirror({
-  INCREASE_STEP_COUNT: null,
-  RESET_STEP_COUNT: null,
+export const resetStepCount = () => ({
+  type: 'RESET_STEP_COUNT',
 });

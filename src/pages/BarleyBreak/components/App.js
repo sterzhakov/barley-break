@@ -1,38 +1,60 @@
 import React from 'react';
 import withStyles from 'react-jss';
+import { connect } from 'react-redux';
+import { toggleNode, replaceNodes } from '../actions/nodes';
+import { increaseStepCount, resetStepCount } from '../actions/stepsCount';
 import Nodes from './Nodes';
 import isWinningNodes from '../services/isWinningNodes';
+import generateNodes from '../services/generateNodes';
+import { compose } from 'recompose';
 
-const nodes = [
-  { top: 0, left: 0, value: 1, },
-  { top: 0, left: 1, value: 2, },
-  { top: 0, left: 2, value: 3, selected: true },
-  { top: 1, left: 0, value: 4, },
-  { top: 1, left: 1, value: null, },
-  { top: 1, left: 2, value: 5, },
-  { top: 2, left: 0, value: 6, },
-  { top: 2, left: 1, value: 7, },
-  { top: 2, left: 2, value: 8, },
-];
+const mapStateToProps = state => ({
+  nodes: state.nodes,
+  stepsCount: state.stepsCount,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onResetButtonClick: () => {
+    const nodes = generateNodes(3);
+    dispatch(resetStepCount());
+    dispatch(replaceNodes(nodes));
+  },
+  toggleNode: ({ top, left }) => {
+    dispatch(toggleNode({ top, left }));
+  },
+  replaceNodes: (nodes) => dispatch(replaceNodes(nodes)),
+  increaseStepCount: () => dispatch(increaseStepCount()),
+  resetStepCount: () => dispatch(resetStepCount()),
+});
 
 const BarleyBreak = (props = {}) => {
   const {
     classes,
+    nodes,
+    stepsCount,
   } = props;
 
   return (
     <div className={classes.root}>
-      <button className={classes.button}>
+      <button
+        onClick={props.onResetButtonClick}
+        className={classes.button}
+      >
         Начать заново
       </button>
-      <Nodes nodes={nodes} />
+      <Nodes
+        nodes={nodes}
+        replaceNodes={props.replaceNodes}
+        toggleNode={props.toggleNode}
+        increaseStepCount={props.increaseStepCount}
+      />
       {isWinningNodes(nodes) ? (
         <div className={classes.victory}>
           Победа!
         </div>
       ) : null}
       <div className={classes.stepsCount}>
-        Шагов - 5
+        Шагов - {stepsCount}
       </div>
     </div>
   );
@@ -81,4 +103,7 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(BarleyBreak);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps),
+)(BarleyBreak);

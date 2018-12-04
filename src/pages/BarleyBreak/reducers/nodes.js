@@ -8,7 +8,7 @@ const nodesReducer = (nodes = [], action) => {
       return nodes.map((node) => {
         return (
           node.top === action.top && node.left === action.left
-            ? { ...node, selected: true }
+            ? { ...node, selected: !node.selected }
             : _.omit(node, 'selected')
         );
       });

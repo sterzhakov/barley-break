@@ -1,7 +1,7 @@
-export const toggleNode = ({ top, bottom }) => ({
+export const toggleNode = ({ top, left }) => ({
   type: 'TOGGLE_NODE',
   top,
-  bottom,
+  left,
 });
 
 export const replaceNodes = nodes => ({
