@@ -1,3 +1,4 @@
 How to preview
 
-- just open ./dist/index.html file
+- npm run webpack
+- open ./dist/index.html file
