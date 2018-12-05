@@ -53,19 +53,21 @@ const Nodes = (props = {}) => {
 const styles = {
   nodes: (props = {}) => {
     const { nodes } = props;
-    const nodesWidthCount = nodes.length / Math.sqrt(nodes.length);
-    const gridTemplateFr = _.fill(Array(nodesWidthCount), '1fr').join(' ');
+    const nodesWidthCount = nodes.length / props.width;
+    const nodesHeightCount = nodes.length / props.height;
     return {
       width: '200px',
-      height: '200px',
+      height: 'auto',
       display: 'grid',
-      gridTemplateColumns: gridTemplateFr,
-      gridTemplateRows: gridTemplateFr,
+      gridTemplateColumns: _.fill(Array(nodesHeightCount), '1fr').join(' '),
+      gridTemplateRows: _.fill(Array(nodesWidthCount), '1fr').join(' '),
       backgroundColor: '#ebebeb',
     };
   },
   node: {
     fontSize: '30px',
+    height: '1fr',
+    width: '1fr',
     margin: '2px',
     display: 'flex',
     alignItems: 'center',

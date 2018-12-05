@@ -7,7 +7,7 @@ import generateNodes from './services/generateNodes';
 
 const BarleyBreak = (props = {}) => {
   const store = createStore(rootReducer, {
-    nodes: generateNodes(props.width),
+    nodes: generateNodes(props.width, props.height),
   });
 
   return (

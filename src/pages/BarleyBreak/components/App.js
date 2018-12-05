@@ -1,7 +1,7 @@
 import React from 'react';
 import withStyles from 'react-jss';
 import { connect } from 'react-redux';
-import { toggleNode, replaceNodes } from '../actions/nodes';
+import { replaceNodes } from '../actions/nodes';
 import { increaseStepCount, resetStepCount } from '../actions/stepsCount';
 import Nodes from './Nodes';
 import isWinningNodes from '../services/isWinningNodes';
@@ -13,14 +13,11 @@ const mapStateToProps = state => ({
   stepsCount: state.stepsCount,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   onResetButtonClick: () => {
-    const nodes = generateNodes(3);
+    const nodes = generateNodes(ownProps.width, ownProps.height);
     dispatch(resetStepCount());
     dispatch(replaceNodes(nodes));
-  },
-  toggleNode: ({ top, left }) => {
-    dispatch(toggleNode({ top, left }));
   },
   replaceNodes: (nodes) => dispatch(replaceNodes(nodes)),
   increaseStepCount: () => dispatch(increaseStepCount()),
@@ -44,6 +41,8 @@ const BarleyBreak = (props = {}) => {
       </button>
       <Nodes
         nodes={nodes}
+        width={props.width}
+        height={props.height}
         replaceNodes={props.replaceNodes}
         toggleNode={props.toggleNode}
         increaseStepCount={props.increaseStepCount}
