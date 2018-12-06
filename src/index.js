@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import BarleyBreak from './pages/BarleyBreak';
 
 ReactDOM.render(
-  <BarleyBreak width={2} height={2}/>,
+  <BarleyBreak width={4} height={4}/>,
   document.getElementById('react-root')
 );

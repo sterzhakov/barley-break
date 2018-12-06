@@ -3,6 +3,7 @@ import withStyles from 'react-jss';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { compose, withHandlers } from 'recompose';
+import FlipMove from 'react-flip-move';
 import moveNodes from '../services/moveNodes';
 
 const handlers = [
@@ -26,7 +27,7 @@ const Nodes = (props = {}) => {
   } = props;
 
   return (
-    <div className={classes.nodes}>
+    <FlipMove className={classes.nodes} style={{position: 'relative'}}>
       {nodes.map((node) => {
         const isNodeBreak = node.value === null;
         return (
@@ -43,7 +44,7 @@ const Nodes = (props = {}) => {
           </div>
         );
       })}
-    </div>
+    </FlipMove>
   );
 };
 
@@ -60,10 +61,16 @@ const styles = {
       gridTemplateRows: _.fill(Array(nodesWidthCount), '1fr').join(' '),
       backgroundColor: '#ebebeb',
     };
+    // return {
+    //   display: 'flex',
+    //   flexDirection: 'row',
+    //   width: '200px',
+    //   height: '200px',
+    // }
   },
   node: {
     fontSize: '30px',
-    height: '1fr',
+    // height: '1fr',
     width: '1fr',
     margin: '2px',
     display: 'flex',
