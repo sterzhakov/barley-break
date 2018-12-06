@@ -1,6 +1,6 @@
 import generateNodes from '../generateNodes';
 
-fdescribe('services/generateNodeInRows', () => {
+describe('services/generateNodeInRows', () => {
   it('generate nodes 3x3', () => {
     const nodes = generateNodes(3, 3);
     const positions = [
@@ -22,7 +22,7 @@ fdescribe('services/generateNodeInRows', () => {
     });
   });
 
-  fit('generate nodes 3x5', () => {
+  it('generate nodes 3x5', () => {
     const nodes = generateNodes(5, 3);
     const positions = [
       { top: 0, left: 0 },
@@ -41,8 +41,6 @@ fdescribe('services/generateNodeInRows', () => {
       { top: 2, left: 3 },
       { top: 2, left: 4 },
     ];
-
-    console.log(nodes);
 
     positions.forEach((position, index) => {
       expect(nodes[index]).toEqual(

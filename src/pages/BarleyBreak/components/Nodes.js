@@ -3,20 +3,17 @@ import withStyles from 'react-jss';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { compose, withHandlers } from 'recompose';
-import countPositionSteps from '../services/countPositionSteps';
-import switchNodes from '../services/switchNodes';
+import moveNodes from '../services/moveNodes';
 
 const handlers = [
   withHandlers({
-    onElementClick: (props) => (event, numberNode) => {
-      if (numberNode.value === null) return null;
-      const breakedNode = props.nodes.find(node => node.value === null);
-      if (!breakedNode) return null;
-      const positionsStepsCount = countPositionSteps(numberNode, breakedNode);
-      if (positionsStepsCount > 1) return null;
-      const nodes = switchNodes(props.nodes, numberNode, breakedNode);
-      props.replaceNodes(nodes);
-      props.increaseStepCount();
+    onElementClick: (props) => (event, nextBreakNode) => {
+      if (nextBreakNode.value === null) return null;
+      const { nextNodes, changedNodes } = moveNodes(props.nodes, nextBreakNode);
+      if (changedNodes.length) {
+        props.replaceNodes(nextNodes);
+        props.increaseStepCount();
+      }
     },
   }),
 ];
