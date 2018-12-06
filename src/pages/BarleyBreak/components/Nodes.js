@@ -23,7 +23,6 @@ const Nodes = (props = {}) => {
   const {
     nodes,
     classes,
-    onChange,
   } = props;
 
   return (
@@ -61,17 +60,11 @@ const styles = {
       gridTemplateRows: _.fill(Array(nodesWidthCount), '1fr').join(' '),
       backgroundColor: '#ebebeb',
     };
-    // return {
-    //   display: 'flex',
-    //   flexDirection: 'row',
-    //   width: '200px',
-    //   height: '200px',
-    // }
   },
   node: {
     fontSize: '30px',
-    // height: '1fr',
-    width: '1fr',
+    height: '60px',
+    // width: '1fr',
     margin: '2px',
     display: 'flex',
     alignItems: 'center',
